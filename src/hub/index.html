@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'" />
+    <title>RITE Client</title>
+    <link rel="stylesheet" href="hub.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true"></div>
+    <header class="top">
+      <div class="brand">
+        <img src="../assets/logo-small.png" alt="" />
+        <div>
+          <b>RITE</b>
+          <small>Client</small>
+        </div>
+      </div>
+      <nav class="links" id="links"></nav>
+    </header>
+
+    <main>
+      <section class="pick">
+        <p class="kicker">Elige tu juego</p>
+        <div class="games">
+          <button type="button" class="game kirka" data-game="kirka">
+            <span class="game-tag">Competitivo</span>
+            <span class="game-name">Kirka</span>
+            <span class="game-sub">Scrims, colas y tema RITE dentro del juego.</span>
+            <span class="game-cta">Jugar</span>
+          </button>
+          <button type="button" class="game vox" data-game="voxarena">
+            <span class="game-tag">De casa</span>
+            <span class="game-name">VOXARENA</span>
+            <span class="game-sub">El FPS de RITE. Las salas de tus partidas se abren solas.</span>
+            <span class="game-cta">Jugar</span>
+          </button>
+        </div>
+        <label class="remember">
+          <input type="checkbox" id="remember" />
+          <span>Abrir directo el último juego la próxima vez (vuelves aquí con «Volver al hub»)</span>
+        </label>
+      </section>
+      <aside class="side">
+        <section class="box scrims">
+          <div class="box-head">
+            <p class="kicker">Scrims RITE</p>
+            <span class="dot" id="scrims-dot" title="Sin conexión"></span>
+          </div>
+          <div id="scrims" class="box-body"></div>
+        </section>
+        <section class="box chat">
+          <div class="box-head">
+            <p class="kicker">Chat RITE</p>
+            <span class="hint" id="chat-hint">#rite-chat</span>
+          </div>
+          <div id="chat-log" class="box-body chat-log"></div>
+          <form id="chat-form" class="chat-form">
+            <input id="chat-text" class="in" type="text" maxlength="300" placeholder="Escribe a la comunidad…" autocomplete="off" />
+            <button type="submit" class="s main">Enviar</button>
+          </form>
+        </section>
+      </aside>
+    </main>
+    <div id="toast" class="toast" hidden></div>
+
+    <footer class="bottom">
+      <span id="version"></span>
+      <span id="update" class="update" hidden></span>
+    </footer>
+    <script src="scrims.js"></script>
+    <script src="chat.js"></script>
+    <script src="hub.js"></script>
+  </body>
+</html>

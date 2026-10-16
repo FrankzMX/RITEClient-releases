@@ -1,0 +1,1033 @@
+/*
+ * RITE theme for Kirka.io: the palette, type and look of RITE WEB.
+ * The client sets --rite-bg and the --rite-icon-* masks from bundled assets.
+ *
+ * Layout:
+ *   1. Tokens and Kirka's own colour variables
+ *   2. Base (fonts, scrollbars, ads)
+ *   3. Buttons everywhere (removes Kirka's blue bevels)
+ *   4. Lobby
+ *   5. Menus (store, servers, friends, inventory, quests pages)
+ *   6. Loading and matchmaking
+ *   7. In game HUD
+ *   8. Pause menu (Esc)
+ *   9. Scoreboard (Tab), death card and end of match
+ */
+
+/* ---------- 1. Tokens ---------- */
+
+:root {
+  --rite-void: #07060b;
+  --rite-ink: #100e16;
+  --rite-panel: #16131c;
+  --rite-gold: #e0b34a;
+  --rite-gold-2: #f3d48a;
+  --rite-gold-deep: #8a6420;
+  --rite-cream: #f4efe4;
+  --rite-mist: #a39886;
+  --rite-line: #3a3324;
+  --rite-red: #d4553f;
+  --rite-red-soft: rgba(212, 85, 63, 0.18);
+  --rite-blue: #6f8fb8;
+  --rite-blue-soft: rgba(111, 143, 184, 0.18);
+  /* Almost opaque instead of a blurred glass: blur is expensive to draw. */
+  --rite-panel-glass: rgba(16, 14, 22, 0.94);
+  --rite-void-glass: rgba(7, 6, 11, 0.62);
+  --rite-gold-soft: rgba(224, 179, 74, 0.12);
+  --rite-gold-glow: rgba(224, 179, 74, 0.35);
+  --rite-font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --rite-font-display: "Oswald", "Arial Narrow", sans-serif;
+  --rite-ease: cubic-bezier(0.19, 1, 0.22, 1);
+  --rite-gold-bar: linear-gradient(90deg, var(--rite-gold-deep), var(--rite-gold), var(--rite-gold-2));
+}
+
+/* Kirka paints its buttons and panels from these variables. */
+#app {
+  --blue-1: var(--rite-ink);
+  --blue-2: var(--rite-panel);
+  --blue-3: var(--rite-line);
+  --blue-4: transparent;
+  --blue-5: transparent;
+  --blue-6: transparent;
+}
+
+/* ---------- 2. Base ---------- */
+
+#app {
+  font-family: var(--rite-font-sans) !important;
+  color: var(--rite-cream);
+}
+/* Kirka sets its font per component; inherit RITE's instead. Kept first so
+ * every display-font rule below wins, and their children inherit it. */
+#app *:not(svg, svg *, i, .fa, [class^="icon-"]) {
+  font-family: inherit !important;
+}
+
+#app .text-1,
+#app .text-2 {
+  -webkit-text-stroke: 0 !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55) !important;
+}
+
+#app ::selection { background: var(--rite-gold); color: var(--rite-void); }
+
+#app ::-webkit-scrollbar { width: 6px; height: 6px; }
+#app ::-webkit-scrollbar-track { background: transparent; }
+#app ::-webkit-scrollbar-thumb { background: var(--rite-line); }
+#app ::-webkit-scrollbar-thumb:hover { background: var(--rite-gold); }
+
+.ad-bottom,
+.ad-left,
+#ad-bottom,
+#app > .interface > .background > .bg-radial,
+#app > .interface > .background > .pattern-bg {
+  display: none !important;
+}
+
+#app input:is([type="text"], [type="search"], [type="number"], :not([type])),
+#app textarea,
+#app .input {
+  background: rgba(7, 6, 11, 0.8) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  color: var(--rite-cream) !important;
+  font-family: var(--rite-font-sans) !important;
+  box-shadow: none !important;
+}
+#app input:is([type="text"], [type="search"], [type="number"], :not([type])):focus,
+#app textarea:focus,
+#app .input:focus { border-color: var(--rite-gold) !important; outline: none !important; }
+#app input::placeholder { color: var(--rite-mist) !important; }
+
+/* ---------- 3. Buttons ---------- */
+
+/*
+ * Every Kirka button is a .button with bevel children (.border-top,
+ * .border-bottom, .triangle and an obfuscated class) and the --top,
+ * --bottom and --hover-color variables. Those are the blue shapes behind
+ * Join, Create, Continue and the rest; drop them all, then restyle.
+ */
+#app .button {
+  --top: transparent !important;
+  --bottom: transparent !important;
+  --hover-color: transparent !important;
+  background: var(--rite-void-glass) !important;
+  border: 1px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: var(--rite-gold-2) !important;
+  transform: none !important;
+  animation: none !important;
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.2s var(--rite-ease) !important;
+}
+#app .button::before,
+#app .button::after,
+#app .button > .border-top,
+#app .button > .border-bottom,
+#app .button > .border,
+#app .button > .triangle,
+#app .button > .triangle-bottom,
+#app .button > .WwNwmM {
+  display: none !important;
+}
+#app .button .text,
+#app .button span {
+  color: inherit !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+#app .button:hover {
+  background: var(--rite-gold) !important;
+  border-color: var(--rite-gold-2) !important;
+  color: var(--rite-void) !important;
+  box-shadow: 0 6px 24px var(--rite-gold-glow) !important;
+}
+#app .button:active { filter: brightness(0.92); }
+
+/* Calls to action: solid gold. */
+#app .play-content #play-btn,
+#app .button.continue,
+#app #continue {
+  background: linear-gradient(135deg, var(--rite-gold-2), var(--rite-gold) 55%, var(--rite-gold-deep)) !important;
+  border: 0 !important;
+  color: var(--rite-void) !important;
+  box-shadow: 0 0 0 1px rgba(243, 212, 138, 0.4), 0 8px 30px rgba(224, 179, 74, 0.25) !important;
+}
+#app .play-content #play-btn:hover,
+#app .button.continue:hover,
+#app #continue:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 1px var(--rite-gold-2), 0 12px 40px rgba(224, 179, 74, 0.45) !important;
+}
+
+/* Leaving or exiting: muted red outline. */
+#app #leave-btn,
+#app .button.exit-btn {
+  border-color: var(--rite-red) !important;
+  color: #f0a48f !important;
+}
+#app #leave-btn:hover,
+#app .button.exit-btn:hover {
+  background: var(--rite-red) !important;
+  color: var(--rite-cream) !important;
+  box-shadow: 0 6px 24px var(--rite-red-soft) !important;
+}
+
+/* ---------- 4. Lobby ---------- */
+
+#app > .interface > .background {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(224, 179, 74, 0.1), transparent 55%),
+    linear-gradient(180deg, rgba(7, 6, 11, 0.35), rgba(7, 6, 11, 0.9)),
+    var(--rite-void) var(--rite-bg) center / cover no-repeat !important;
+}
+
+/* Generic Kirka panels */
+#app .card-cont,
+#app .container-card {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s var(--rite-ease);
+}
+#app .card-cont:hover { border-color: rgba(224, 179, 74, 0.55) !important; }
+#app .card-cont .label,
+#app .head-text,
+#app .name-page {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--rite-gold-2) !important;
+}
+
+/* Left navigation: RITE's own line icons replace Kirka's. */
+#app .interface .left-icons {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#app .left-icons > .icon-btn {
+  position: relative;
+  background: var(--rite-void-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: var(--rite-mist) !important;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.2s var(--rite-ease) !important;
+}
+#app .left-icons > .icon-btn::after,
+#app .left-icons > .icon-btn > .border {
+  display: none !important;
+}
+#app .left-icons > .icon-btn:hover,
+#app .left-icons > .icon-btn.active {
+  background: var(--rite-gold-soft) !important;
+  border-color: var(--rite-gold) !important;
+  color: var(--rite-gold-2) !important;
+  transform: translateX(3px);
+}
+#app .left-icons > .icon-btn .text-icon {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: inherit !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+#app .left-icons > .icon-btn:is(.HUB, .STORE, .SERVERS, .QUESTS, .FRIENDS, .INVENTORY, .EDITOR, .MAP) svg,
+#app .left-icons > .icon-btn:is(.HUB, .STORE, .SERVERS, .QUESTS, .FRIENDS, .INVENTORY, .EDITOR, .MAP) img {
+  visibility: hidden !important;
+}
+#app .left-icons > .icon-btn:is(.HUB, .STORE, .SERVERS, .QUESTS, .FRIENDS, .INVENTORY, .EDITOR, .MAP)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.1em;
+  height: 2.1em;
+  margin-top: -1.6em;
+  transform: translateX(-50%);
+  background: currentColor;
+  -webkit-mask: var(--rite-icon) center / contain no-repeat;
+  mask: var(--rite-icon) center / contain no-repeat;
+  pointer-events: none;
+}
+#app .left-icons > .icon-btn.HUB { --rite-icon: var(--rite-icon-hub); }
+#app .left-icons > .icon-btn.STORE { --rite-icon: var(--rite-icon-store); }
+#app .left-icons > .icon-btn.SERVERS { --rite-icon: var(--rite-icon-servers); }
+#app .left-icons > .icon-btn.QUESTS { --rite-icon: var(--rite-icon-quests); }
+#app .left-icons > .icon-btn.FRIENDS { --rite-icon: var(--rite-icon-friends); }
+#app .left-icons > .icon-btn.INVENTORY { --rite-icon: var(--rite-icon-inventory); }
+#app .left-icons > .icon-btn:is(.EDITOR, .MAP) { --rite-icon: var(--rite-icon-editor); }
+
+/* Top right: Kirka's shortcuts (Reddit, client download, settings). */
+#app .right-icons > .icon-btn {
+  background: var(--rite-void-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: var(--rite-mist) !important;
+  transition: color 0.15s, border-color 0.15s !important;
+}
+#app .right-icons > .icon-btn::after,
+#app .right-icons > .icon-btn > .border { display: none !important; }
+#app .right-icons > .icon-btn:hover {
+  border-color: var(--rite-gold) !important;
+  color: var(--rite-gold-2) !important;
+}
+#app .right-icons > .icon-btn svg,
+#app .right-icons > .icon-btn svg path { fill: currentColor !important; }
+#app .right-icons > .icon-btn .text-icon,
+#app .right-icons > .icon-btn .text {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: inherit !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Profile card, level and XP */
+#app .user-info .nickname,
+#app .player-cont .nickname {
+  color: var(--rite-cream) !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6) !important;
+}
+#app .clan-tag { color: var(--rite-gold-2) !important; }
+#app .player-cont .levels,
+#app .level-cont,
+#app .lvl {
+  background: rgba(7, 6, 11, 0.6) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  color: var(--rite-gold-2) !important;
+  font-family: var(--rite-font-display) !important;
+}
+#app .progress-top .level-value,
+#app .progress-top .exp-values {
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.08em;
+  color: var(--rite-gold-2) !important;
+}
+#app .progress-line {
+  background: rgba(7, 6, 11, 0.7) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 0 !important;
+}
+#app .progress-line .progress {
+  background: var(--rite-gold-bar) !important;
+  border-radius: 0 !important;
+}
+
+/* Coins and diamonds */
+#app .left-interface > .moneys > div,
+#app .moneys > .card-cont {
+  background: var(--rite-void-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-left: 2px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app .moneys .amount,
+#app .moneys .count {
+  font-family: var(--rite-font-display) !important;
+  color: var(--rite-cream) !important;
+  letter-spacing: 0.06em;
+}
+
+/* Daily streak button and its window */
+#app .left-interface .button.daily-rewards-btn {
+  background: var(--rite-void-glass) !important;
+  border: 1px solid var(--rite-gold) !important;
+  color: var(--rite-gold-2) !important;
+}
+#app .left-interface .button.daily-rewards-btn:hover {
+  background: var(--rite-gold) !important;
+  color: var(--rite-void) !important;
+}
+#app .daily-streak,
+#app .daily-streak .subject,
+#app .daily-streak .day-card {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app .daily-streak .streak-head,
+#app .daily-streak .task-text {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rite-gold-2) !important;
+}
+#app .daily-streak .taken-overlay { background: rgba(7, 6, 11, 0.7) !important; }
+#app .streak-circle {
+  background: var(--rite-gold-soft) !important;
+  border: 1px solid var(--rite-gold) !important;
+  color: var(--rite-gold-2) !important;
+}
+
+/* Quests panel (lobby) and quests page */
+#app #dailyQuests,
+#app .right-interface .quests,
+#app .quests-container > .quests {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-top: 2px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app #dailyQuests:hover,
+#app .right-interface .quests:hover { border-color: rgba(224, 179, 74, 0.55) !important; border-top-color: var(--rite-gold-2) !important; }
+#app .quests .head,
+#app .quests .head .text,
+#app .quests .reset-time,
+#app .quests .time-left {
+  background: transparent !important;
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--rite-gold-2) !important;
+}
+#app .quests .reset-time,
+#app .quests .time-left { color: var(--rite-mist) !important; letter-spacing: 0.08em; }
+#app .quests .subject {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#app .quests .quest {
+  background: rgba(7, 6, 11, 0.55) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-left: 2px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app .quests .quest .description,
+#app .quests .quest .name { color: var(--rite-cream) !important; }
+#app .quests .progress {
+  background: var(--rite-gold-bar) !important;
+  border-radius: 0 !important;
+}
+#app .quests .reward,
+#app .quests .rewards .list > div {
+  background: var(--rite-gold-soft) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  color: var(--rite-gold-2) !important;
+}
+
+/* Play panel: mode, region, private toggle, join and create */
+#app .play-content {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#app .play-content #play-btn {
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.2em;
+}
+#app .play-content #play-btn .text {
+  color: var(--rite-void) !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 !important;
+}
+#app .play-content .select-mod,
+#app .play-content .select-region,
+#app .select-mods-cont,
+#app .select-regions-cont {
+  background: var(--rite-void-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: var(--rite-cream) !important;
+}
+#app .play-content .select-mod:hover,
+#app .play-content .select-region:hover { border-color: var(--rite-gold) !important; }
+#app .mod-button,
+#app .map-button {
+  background: rgba(7, 6, 11, 0.55) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  color: var(--rite-cream) !important;
+}
+#app .mod-button.active,
+#app .map-button.active,
+#app .mod-button:hover,
+#app .map-button:hover {
+  background: var(--rite-gold-soft) !important;
+  border-color: var(--rite-gold) !important;
+  color: var(--rite-gold-2) !important;
+}
+#app .play-content .region .custom-checkbox > span,
+#app .custom-checkbox > span {
+  background: rgba(7, 6, 11, 0.55) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  color: var(--rite-mist) !important;
+}
+#app .custom-checkbox > input:checked + span {
+  background: var(--rite-gold-soft) !important;
+  border-color: var(--rite-gold) !important;
+  color: var(--rite-gold-2) !important;
+}
+
+/* Private toggle: a lock that turns gold when the lobby is private. */
+#app .private-btn > span {
+  background: var(--rite-void-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: var(--rite-mist) !important;
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+#app .private-btn > span::before,
+#app .private-btn > span::after { background: transparent !important; }
+#app .private-btn > input:checked + span {
+  background: var(--rite-gold-soft) !important;
+  border-color: var(--rite-gold) !important;
+  color: var(--rite-gold-2) !important;
+}
+
+#app #join-btn,
+#app #create-btn,
+#app .button.join-btn,
+#app .button.create-btn {
+  min-width: 7rem;
+}
+
+/* Party: teammates and the empty invite slots */
+#app #team-section > .player-cont > div .levels { color: var(--rite-gold-2) !important; }
+#app #invite-btn:not(.button),
+#app .invite-btn:not(.button) {
+  background: rgba(7, 6, 11, 0.4) !important;
+  border: 1px dashed var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: var(--rite-mist) !important;
+  transition: border-color 0.15s, color 0.15s, background 0.15s !important;
+}
+#app #invite-btn::before,
+#app #invite-btn::after { background: transparent !important; box-shadow: none !important; }
+#app #invite-btn:not(.button):hover,
+#app .invite-btn:not(.button):hover {
+  background: var(--rite-gold-soft) !important;
+  border: 1px solid var(--rite-gold) !important;
+  color: var(--rite-gold-2) !important;
+}
+#app #invite-btn svg,
+#app #invite-btn svg path,
+#app .invite-btn svg path { fill: currentColor !important; }
+
+/* News, streams and changelog */
+#app .news,
+#app .live-streams,
+#app .changelog-item {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+/* ---------- 5. Menus ---------- */
+
+#view > .background {
+  background:
+    linear-gradient(180deg, rgba(7, 6, 11, 0.7), rgba(7, 6, 11, 0.94)),
+    var(--rite-void) var(--rite-bg) center / cover no-repeat !important;
+}
+#view .container,
+#view .general-content {
+  background: transparent !important;
+}
+#app .tabs,
+#app .tab-bar,
+#app .tabs-wrapper {
+  background: transparent !important;
+  border-bottom: 1px solid var(--rite-line) !important;
+  box-shadow: none !important;
+}
+#app .tab,
+#app .nav-tab {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: inset 0 -2px 0 transparent !important;
+  color: var(--rite-mist) !important;
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: color 0.15s, box-shadow 0.15s !important;
+}
+#app .tab:hover,
+#app .tab.active,
+#app .tab.active-tab,
+#app .nav-tab.is-active {
+  color: var(--rite-gold-2) !important;
+  box-shadow: inset 0 -2px 0 var(--rite-gold) !important;
+}
+
+/* Store, inventory and market cards */
+#app .inventory-card,
+#app .character-card-cont,
+#app .item-content,
+#app .inventory .item,
+#app .store .item,
+#app .long-card {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app .inventory-card:hover,
+#app .inventory .item:hover,
+#app .store .item:hover {
+  border-color: var(--rite-gold) !important;
+}
+#app .item-name,
+#app .gun-name,
+#app .weapon-name {
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.08em;
+}
+/* Rarity is game information, so it keeps its colour as a thin accent. */
+#app .COMMON { --rite-rarity: #b9b3a6; }
+#app .RARE { --rite-rarity: #4f9cff; }
+#app .EPIC { --rite-rarity: #b06cff; }
+#app .LEGENDARY { --rite-rarity: #f0b13a; }
+#app .MYTHICAL { --rite-rarity: #ff4f6d; }
+#app .inventory-card:is(.COMMON, .RARE, .EPIC, .LEGENDARY, .MYTHICAL),
+#app .item:is(.COMMON, .RARE, .EPIC, .LEGENDARY, .MYTHICAL) {
+  box-shadow: inset 0 -2px 0 var(--rite-rarity) !important;
+}
+
+/* Servers list */
+#app .servers .server,
+#app .available-rooms .server {
+  background: rgba(7, 6, 11, 0.55) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+}
+#app .servers .server:hover { border-color: var(--rite-gold) !important; }
+#app .servers .heads,
+#app .servers .list-labels {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rite-gold-2) !important;
+}
+
+/* Friends */
+#app .friend,
+#app .add-friends {
+  background: rgba(7, 6, 11, 0.55) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app .friend:hover { border-color: rgba(224, 179, 74, 0.55) !important; }
+#app .friend .online { color: #7fcf8a !important; }
+
+/* Clans and leaderboards */
+#app .clans .my-clan,
+#app .leaderboard-cont,
+#app .champions-container,
+#app .background-leaders {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+}
+
+/* Modals */
+#app .modal-layout,
+#app .alert-default,
+#app .v-popover .tooltip,
+#app .tooltip {
+  background: var(--rite-panel) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-top: 2px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+  color: var(--rite-cream) !important;
+}
+
+/* ---------- 6. Loading and matchmaking ---------- */
+
+#app .searching-game > .center {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+}
+#app .searching-game .search-label,
+#app .searching-game .time {
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.2em;
+  color: var(--rite-gold-2) !important;
+}
+
+#app .loading-scene > .background-cont {
+  background: var(--rite-void) var(--rite-bg) center / cover no-repeat !important;
+}
+#app .loading-scene .name-map,
+#app .loading-scene .mode {
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rite-gold-2) !important;
+}
+#app .loading-scene > .progress { background: var(--rite-gold) !important; }
+
+/* ---------- 7. In game HUD ---------- */
+
+/* Health and stamina */
+#app .desktop-game-interface .state-cont .hp-cont .cont-hp,
+#app .desktop-game-interface .state-cont .cont-endurance {
+  background: rgba(7, 6, 11, 0.65) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+#app .desktop-game-interface .state-cont .hp-cont .cont-hp .hp-progress {
+  background: var(--rite-gold-bar);
+  border-radius: 0 !important;
+  transition: width 0.15s linear, background-color 0.2s;
+}
+#app .desktop-game-interface .state-cont .cont-endurance .endurance-progress {
+  background: linear-gradient(90deg, #5b5446, var(--rite-mist)) !important;
+  border-radius: 0 !important;
+}
+#app .desktop-game-interface .state-cont .hp-cont .hp-title {
+  font-family: var(--rite-font-display) !important;
+  color: var(--rite-cream) !important;
+  letter-spacing: 0.06em;
+}
+
+/* Kills / deaths counters and round timer */
+#app .desktop-game-interface .kill-death .bg,
+#app .timer.bg,
+#app .desktop-game-interface .state-cont .left .timer {
+  background: rgba(7, 6, 11, 0.65) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.08em;
+  color: var(--rite-cream) !important;
+}
+#app .desktop-game-interface .kill-death svg,
+#app .desktop-game-interface .kill-death svg path { fill: var(--rite-gold) !important; }
+/* Each counter its own colour: kills cream, deaths red, assists gold, points
+   blue; K/D and HS% show their label in gold. */
+#app .desktop-game-interface .kill-death .kill svg,
+#app .desktop-game-interface .kill-death .kill svg path { fill: var(--rite-cream) !important; }
+#app .desktop-game-interface .kill-death svg.icon-death,
+#app .desktop-game-interface .kill-death svg.icon-death path { fill: var(--rite-red) !important; }
+#app .desktop-game-interface .kill-death .rite-stat-points svg,
+#app .desktop-game-interface .kill-death .rite-stat-points svg path { fill: var(--rite-blue) !important; }
+#app .desktop-game-interface .kill-death .rite-stat-label { color: var(--rite-gold-2) !important; }
+
+/* Team score (TDM, Point, etc.): red and blue stay readable, just quieter. */
+#app .game-interface .team-score .label {
+  background: rgba(7, 6, 11, 0.7) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.06em;
+  color: var(--rite-cream) !important;
+}
+#app .game-interface .team-score .label.red { border-bottom: 2px solid var(--rite-red) !important; }
+#app .game-interface .team-score .label.blue { border-bottom: 2px solid var(--rite-blue) !important; }
+#app .game-interface .team-score .round,
+#app .game-interface .countdown {
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.16em;
+  color: var(--rite-gold-2) !important;
+}
+
+/* Kill feed */
+#app .kill-bar-cont > .kill-bar-item {
+  background: rgba(7, 6, 11, 0.7) !important;
+  border: 0 !important;
+  border-left: 2px solid var(--rite-gold) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: var(--rite-font-sans) !important;
+}
+#app .kill-bar-cont > .kill-bar-item svg,
+#app .kill-bar-cont > .kill-bar-item svg path { fill: var(--rite-gold-2) !important; }
+
+/* Weapons and ammo */
+#app .weapons-cont .weapon-cont,
+#app .weapons-cont .list-weapons > div {
+  background: rgba(7, 6, 11, 0.55) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app .weapons-cont .weapon-cont .weapon-name,
+#app .weapons-cont .weapon-cont .key {
+  font-family: var(--rite-font-display) !important;
+  color: var(--rite-mist) !important;
+}
+#app .weapons-cont .weapon-cont:has(.is-selected),
+#app .weapons-cont .weapon-cont.is-selected {
+  border-color: var(--rite-gold) !important;
+  background: var(--rite-gold-soft) !important;
+}
+#app .weapons-cont .weapon-cont .is-selected { background: transparent !important; }
+#app .weapons-cont .weapon-cont:has(.is-selected) :is(.weapon-name, .key) { color: var(--rite-gold-2) !important; }
+#app .weapons-cont .state-weapon-active .ammunition {
+  font-family: var(--rite-font-display) !important;
+  color: var(--rite-gold-2) !important;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+}
+#app .weapons-cont .state-weapon-active .ammunition.lack { color: var(--rite-red) !important; }
+
+/* Chat */
+#app .desktop-game-interface .chat > .messages {
+  background: linear-gradient(90deg, rgba(7, 6, 11, 0.55), transparent) !important;
+  border-left: 2px solid var(--rite-gold) !important;
+}
+#app .desktop-game-interface .chat .message { text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important; }
+
+/* Minimap and team list */
+#app .mini-map-cont {
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app .mini-map-cont .name {
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.12em;
+  color: var(--rite-gold-2) !important;
+}
+#app .desktop-game-interface .hp {
+  border-radius: 0 !important;
+}
+
+/* ---------- 8. Pause menu (Esc) ---------- */
+
+#app .esc-interface {
+  /* No blur: blurring over the game's WebGL canvas costs frames on weak GPUs. */
+  background: radial-gradient(ellipse at center, rgba(7, 6, 11, 0.72), rgba(7, 6, 11, 0.92)) !important;
+}
+#app .esc-interface .left-container,
+#app .esc-interface .right-container {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-top: 2px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55) !important;
+}
+#app .esc-interface .right-container::before,
+#app .esc-interface .right-container::after,
+#app .esc-interface .left-container::before,
+#app .esc-interface .left-container::after { display: none !important; }
+#app .esc-interface .players-label,
+#app .esc-interface .label,
+#app .esc-interface .head .text {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rite-gold-2) !important;
+}
+#app .esc-interface .player-list .player-cont,
+#app .esc-interface .left-container .player {
+  background: rgba(7, 6, 11, 0.55) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#app .esc-interface .player-list .player-cont:hover,
+#app .esc-interface .left-container .player:hover { border-color: rgba(224, 179, 74, 0.55) !important; }
+#app .esc-interface .player-right svg,
+#app .esc-interface .player-right svg path { fill: var(--rite-mist) !important; }
+#app .esc-interface .player-right > *:hover svg path { fill: var(--rite-gold-2) !important; }
+#app .esc-interface .btn-report:hover svg path { fill: var(--rite-red) !important; }
+
+/* Head buttons: spectate, invite, settings, exit */
+#app .esc-interface .head-right button,
+#app .esc-interface .head-right .button {
+  min-height: 2.4rem;
+}
+
+/* Change weapon grid */
+#app .esc-interface .change-container .gun {
+  background: rgba(7, 6, 11, 0.55) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s, background 0.15s !important;
+}
+#app .esc-interface .change-container .gun:hover {
+  background: var(--rite-gold-soft) !important;
+  border-color: var(--rite-gold) !important;
+}
+#app .esc-interface .change-container .gun.active,
+#app .esc-interface .change-container .gun.selected,
+#app .esc-interface .change-container .gun.is-selected {
+  background: var(--rite-gold-soft) !important;
+  border-color: var(--rite-gold-2) !important;
+  box-shadow: inset 0 0 0 1px var(--rite-gold) !important;
+}
+#app .esc-interface .change-container .gun .gun-name {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rite-cream) !important;
+}
+
+/* ---------- 9. Scoreboard, death card and end of match ---------- */
+
+#app .tab-info,
+#app .tab-team-info {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-top: 2px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5) !important;
+}
+#app .tab-info .head,
+#app .tab-team-info .head,
+#app .tab-info .heads,
+#app .tab-team-info .heads {
+  background: transparent !important;
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--rite-mist) !important;
+}
+#app .tab-team-info .label.red,
+#app .tab-team-info .label.blue {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--rite-cream) !important;
+  border-radius: 0 !important;
+}
+#app .tab-team-info .label.red { background: linear-gradient(90deg, var(--rite-red-soft), transparent) !important; border-left: 2px solid var(--rite-red) !important; }
+#app .tab-team-info .label.blue { background: linear-gradient(-90deg, var(--rite-blue-soft), transparent) !important; border-right: 2px solid var(--rite-blue) !important; }
+#app .tab-info .player-cont,
+#app .tab-team-info .player-cont {
+  background: rgba(7, 6, 11, 0.45) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--rite-line) !important;
+  border-radius: 0 !important;
+}
+#app .tab-info .player-cont.you,
+#app .tab-team-info .player-cont.you,
+#app .tab-info .player-cont .you {
+  background: var(--rite-gold-soft) !important;
+  box-shadow: inset 2px 0 0 var(--rite-gold) !important;
+}
+#app .tab-info .player-cont .nickname,
+#app .tab-team-info .player-cont .nickname { color: var(--rite-cream) !important; }
+#app .tab-info .player-right svg path,
+#app .tab-team-info .player-right svg path { fill: var(--rite-mist) !important; }
+
+/* Death card */
+#app .game-interface > .death-cont .user-card {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-top: 2px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+}
+#app .death-cont .user-card .label-killed {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rite-gold-2) !important;
+}
+
+/* End of match */
+#app .end-modal {
+  background: radial-gradient(ellipse at center, rgba(7, 6, 11, 0.5), rgba(7, 6, 11, 0.9)) !important;
+}
+#app .end-modal .content,
+#app .end-modal .card-cont {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+}
+#app .end-modal .card-cont .label,
+#app .end-modal .team-list-players .label {
+  font-family: var(--rite-font-display) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+#app .end-modal .team-list-players .list .player {
+  background: rgba(7, 6, 11, 0.45) !important;
+  border-bottom: 1px solid var(--rite-line) !important;
+  border-radius: 0 !important;
+}
+#app .end-modal .top-items .item:first-child {
+  background: linear-gradient(90deg, rgba(224, 179, 74, 0.16), transparent 70%) !important;
+  border-left: 2px solid var(--rite-gold-2) !important;
+}
+#app .end-modal .next-round .progress-line .progress { background: var(--rite-gold) !important; }
+
+/* ---------- 10. Everything else ---------- */
+
+/*
+ * Kirka's remaining menus (Hub, Clans, Market, Kirka TV, news, terms, the end
+ * screen) are recoloured at runtime by the client, which moves any leftover
+ * Kirka blue onto this palette. These rules cover the pieces that have
+ * stable names.
+ */
+#app .top-bar {
+  background: rgba(7, 6, 11, 0.85) !important;
+  border-bottom: 1px solid var(--rite-line) !important;
+  box-shadow: none !important;
+}
+#app .top-bar .name-page,
+#app .top-bar .title {
+  background: transparent !important;
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.18em;
+  color: var(--rite-gold-2) !important;
+}
+#app .close,
+#app .close-icon,
+#app .top-bar .close {
+  background: transparent !important;
+  border: 1px solid var(--rite-line) !important;
+  border-radius: 2px !important;
+  color: var(--rite-mist) !important;
+  transition: border-color 0.15s, color 0.15s, background 0.15s !important;
+}
+#app .close:hover,
+#app .close-icon:hover {
+  background: var(--rite-red) !important;
+  border-color: var(--rite-red) !important;
+  color: var(--rite-cream) !important;
+}
+#app .close svg path,
+#app .close-icon svg path { fill: currentColor !important; }
+
+#app .title,
+#app .mode-title,
+#app .map-title,
+#app .card-head,
+#app .all-scores-label,
+#app .awards-label {
+  font-family: var(--rite-font-display) !important;
+  letter-spacing: 0.1em;
+}
+
+/* End of match: the TOPS table and the countdown bar */
+#app .end-modal .all-scores,
+#app .end-modal .players-cont {
+  background: var(--rite-panel-glass) !important;
+  border: 1px solid var(--rite-line) !important;
+  border-top: 2px solid var(--rite-gold) !important;
+  border-radius: 2px !important;
+}
+#app .end-modal .progress-line { background: rgba(7, 6, 11, 0.7) !important; }
+#app .end-modal .progress-line .progress { background: var(--rite-gold-bar) !important; }
