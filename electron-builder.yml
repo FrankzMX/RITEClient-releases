@@ -1,0 +1,40 @@
+appId: com.rite.client
+productName: RITE Client
+copyright: "Copyright (C) 2026 Frankz Xavier García y García. RITE Client, GPL-3.0. Incluye ideas y código de Smudgy Client y Juice Client."
+directories:
+  output: dist
+files:
+  - src/**/*
+  - package.json
+  - LICENSE
+  - AUTHORS.md
+asar: true
+# discord-rpc pulls in an optional native module (register-scheme) we never use.
+npmRebuild: false
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: src/assets/icon.png
+  artifactName: "RITE-Client-Setup-${version}.${ext}"
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  license: LICENSE
+mac:
+  target: dmg
+  icon: src/assets/icon.png
+  category: public.app-category.games
+  artifactName: "RITE-Client-${version}-${arch}.${ext}"
+linux:
+  target: [AppImage]
+  category: Game
+  icon: src/assets/icon.png
+  artifactName: "RITE-Client-${version}.${ext}"
+# Installers go to a separate public repo so this one can stay private.
+# Tags with a suffix (v0.2.0-beta.1) are published as prereleases (EP_PRE_RELEASE).
+publish:
+  provider: github
+  owner: FrankzMX
+  repo: RITEClient-releases
+  releaseType: release

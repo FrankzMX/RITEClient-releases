@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'" />
+    <title>RITE Client</title>
+    <link rel="stylesheet" href="hub.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true"></div>
+    <header class="top">
+      <div class="brand">
+        <img src="../assets/logo-small.png" alt="" />
+        <div>
+          <b>RITE</b>
+          <small>Client</small>
+        </div>
+      </div>
+      <nav class="links" id="links">
+        <button type="button" class="edit" id="edit" aria-pressed="false">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M11 2.5l2.5 2.5L6 12.5H3.5V10z" /></svg>
+          <span>Editar HUB</span>
+        </button>
+      </nav>
+    </header>
+
+    <div class="editbar" id="editbar" hidden>
+      <span class="lbl">Editando</span>
+      <span class="grow">Mueve cada panel desde su barra dorada y cambia su tamaño desde la esquina.</span>
+      <button type="button" class="chip" data-preset="clasico">Clásico</button>
+      <button type="button" class="chip" data-preset="apilados">Juegos apilados</button>
+      <button type="button" class="chip" data-preset="chat">Chat grande</button>
+      <button type="button" class="chip" id="edit-reset">Restablecer</button>
+      <button type="button" class="chip main" id="edit-done">Listo</button>
+    </div>
+
+    <main>
+      <div class="grid" id="grid">
+        <div class="cells" id="cells" aria-hidden="true"></div>
+        <div class="ghost" id="ghost" aria-hidden="true"></div>
+
+        <section class="p game kirka" data-panel="kirka" data-game="kirka" tabindex="0" aria-label="Jugar Kirka">
+          <span class="handle" data-drag>⠿ Kirka</span>
+          <div class="art lock"><img src="../assets/games/kirka.png" alt="Kirka" draggable="false" /></div>
+          <div class="info lock">
+            <div class="txt">
+              <div class="tag">Competitivo</div>
+              <div class="sub">Scrims, colas y tema RITE dentro del juego.</div>
+            </div>
+            <button type="button" class="play">Jugar</button>
+          </div>
+          <span class="size"></span><span class="resize" data-resize></span>
+        </section>
+
+        <section class="p game vox" data-panel="voxarena" data-game="voxarena" tabindex="0" aria-label="Jugar VOXARENA">
+          <span class="handle" data-drag>⠿ VOXARENA</span>
+          <div class="art lock">
+            <div class="vox-logo">
+              <div class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <img src="../assets/games/voxarena.png" alt="VOXARENA" draggable="false" />
+            </div>
+          </div>
+          <div class="info lock">
+            <div class="txt">
+              <div class="tag">De casa</div>
+              <div class="sub">El FPS de RITE. Las salas de tus partidas se abren solas.</div>
+            </div>
+            <button type="button" class="play">Jugar</button>
+          </div>
+          <span class="size"></span><span class="resize" data-resize></span>
+        </section>
+
+        <section class="p box scrims" data-panel="scrims">
+          <span class="handle" data-drag>⠿ Scrims RITE</span>
+          <div class="box-head">
+            <p class="kicker">Scrims RITE</p>
+            <span class="dot" id="scrims-dot" title="Sin conexión"></span>
+          </div>
+          <div id="scrims" class="box-body lock"></div>
+          <span class="size"></span><span class="resize" data-resize></span>
+        </section>
+
+        <section class="p box chat" data-panel="chat">
+          <span class="handle" data-drag>⠿ Chat RITE</span>
+          <div class="box-head">
+            <p class="kicker">Chat RITE</p>
+            <span class="hint" id="chat-hint">#rite-chat</span>
+          </div>
+          <div id="chat-log" class="box-body chat-log lock"></div>
+          <form id="chat-form" class="chat-form lock">
+            <input id="chat-text" class="in" type="text" maxlength="300" placeholder="Escribe a la comunidad…" autocomplete="off" />
+            <button type="submit" class="s main">Enviar</button>
+          </form>
+          <span class="size"></span><span class="resize" data-resize></span>
+        </section>
+      </div>
+    </main>
+    <div id="toast" class="toast" hidden></div>
+
+    <footer class="bottom">
+      <label class="remember">
+        <input type="checkbox" id="remember" />
+        <span title="Vuelves aquí con «Volver al hub»">Abrir directo el último juego</span>
+      </label>
+      <p class="legal">
+        Kirka y VOXARENA, con sus logos, pertenecen a sus respectivos creadores y se muestran solo para identificar cada juego.<br />
+        RITE Client es un proyecto de la comunidad RITE y no es un cliente oficial de Kirka.
+      </p>
+      <div class="ver">
+        <span id="version"></span>
+        <span id="update" class="update" hidden></span>
+      </div>
+    </footer>
+    <script src="layout.js"></script>
+    <script src="editor.js"></script>
+    <script src="scrims.js"></script>
+    <script src="chat.js"></script>
+    <script src="hub.js"></script>
+  </body>
+</html>
