@@ -1,0 +1,36 @@
+{
+  "name": "rite-client",
+  "productName": "RITE Client",
+  "version": "0.1.0",
+  "description": "Cliente de Kirka.io para la comunidad competitiva de RITE",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "lint": "node scripts/check-syntax.js",
+    "test": "node --test \"test/**/*.test.js\"",
+    "build": "electron-builder",
+    "dist": "electron-builder --publish always",
+    "publicar": "node scripts/publicar.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FrankzMX/RITEClient.git"
+  },
+  "author": "Frankz Xavier García y García",
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "electron": "^44.7.0",
+    "electron-builder": "^26.17.0",
+    "esbuild": "^0.25.10"
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1",
+    "electron-updater": "^6.8.10"
+  },
+  "rite": {
+    "discordClientId": "1559050134937931838"
+  }
+}
