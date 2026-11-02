@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RITE Studio</title>
+<link rel="icon" href="rite-emblema.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="estudio.css">
+</head>
+<body>
+<header id="barra">
+  <a class="logo" href="https://rite.lat/tools" title="RITE Web">
+    <img src="rite-emblema.png" alt="">
+    <span><span class="logo-marca">RITE</span><span class="logo-sub">Studio</span></span>
+  </a>
+  <button id="bAbrirMapa" class="b"></button>
+  <div class="menu">
+    <button id="bEjemplos" class="b"></button>
+    <div id="menuEjemplos" class="desplegable" hidden></div>
+  </div>
+  <button id="bTextoMapa" class="b"></button>
+  <button id="bAbrirProyecto" class="b"></button>
+  <button id="bGuardar" class="b"></button>
+  <button id="bCompartir" class="b"></button>
+  <button id="bPlantillas" class="b"></button>
+  <button id="bDeshacer" class="b chico">↶</button>
+  <button id="bRehacer" class="b chico">↷</button>
+  <span class="relleno"></span>
+  <button id="bFoto" class="b"></button>
+  <button id="bExportar" class="b principal"></button>
+  <button id="bIdioma" class="b chico" title="Español / English">EN</button>
+  <button id="bAyuda" class="b chico">?</button>
+</header>
+
+<main id="cuerpo">
+  <section id="visor">
+    <canvas id="vista"></canvas>
+    <div id="chipCam" class="chip" hidden></div>
+    <div id="teclas" class="pista"></div>
+    <div id="vacio">
+      <h1 id="tBienvenida"></h1>
+      <ol class="pasos" id="pasos"></ol>
+      <div class="acciones">
+        <button id="bElegir" class="b principal grande"></button>
+        <button id="bPegar" class="b grande"></button>
+        <button id="bProbar" class="b grande"></button>
+      </div>
+    </div>
+    <div id="cargando" hidden><div class="rueda"></div><span></span></div>
+    <div id="soltar" hidden></div>
+  </section>
+  <aside id="panel">
+    <nav id="pestanas"></nav>
+    <div id="contenido"></div>
+  </aside>
+</main>
+
+<footer id="linea">
+  <div class="controles">
+    <button id="bPlay" class="b redondo">▶</button>
+    <span id="tiempo">0:00 / 0:10</span>
+    <span class="dur"><span id="tDur"></span>
+      <button id="bMenos" class="b mini">−</button><button id="bMas" class="b mini">+</button></span>
+    <span class="zoomLinea"><button id="bZoomMenos" class="b mini">🔍−</button><button id="bZoomMas" class="b mini">🔍+</button><button id="bZoomTodo" class="b mini">⤢</button></span>
+    <button class="ay" data-ayuda="linea">?</button>
+  </div>
+  <canvas id="pistas"></canvas>
+</footer>
+
+<div id="popAyuda" class="pop" hidden></div>
+<div id="aviso" class="aviso" hidden></div>
+<dialog id="dlgExportar"></dialog>
+<dialog id="dlgTexto"></dialog>
+<dialog id="dlgAtajos" class="ancho"></dialog>
+<dialog id="dlgSkins"></dialog>
+<input id="archivo" type="file" accept=".json,application/json" hidden>
+<input id="archivoAudio" type="file" accept="audio/*" multiple hidden>
+
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/jsm/" } }</script>
+<script type="module" src="estudio.js"></script>
+</body>
+</html>
