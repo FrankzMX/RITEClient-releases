@@ -1,0 +1,158 @@
+@font-face { font-family: Oswald; src: url(fuentes/oswald.woff2); font-weight: 700; }
+[hidden] { display: none !important; }
+input[type=range] { margin: 4px 0; }
+@font-face { font-family: Creepster; src: url(fuentes/creepster.woff2); }
+:root {
+  /* Los mismos colores y letras que RITE Web (rite.lat). */
+  --fondo: #07060b; --panel: #100e16; --panel2: #16131c; --borde: #3a3324; --texto: #f4efe4; --suave: #a39886;
+  --oro: #e0b34a; --oro2: #f3d48a; --azul: #5aa9ff; --verde: #5fd38a; --rojo: #ff6b6b;
+  --r: 2px;
+  --letra: "Outfit", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --titulo: "Oswald", "Arial Narrow", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--fondo); color: var(--texto); font: 14px/1.45 var(--letra); overflow: hidden; }
+button { font: inherit; color: inherit; }
+body { display: grid; grid-template-rows: auto 1fr auto; }
+
+#barra { display: flex; align-items: center; gap: 6px; padding: 8px 14px; background: linear-gradient(180deg, rgba(7, 6, 11, 0.6), rgba(7, 6, 11, 0.92)), var(--fondo) url(rite-cosmos.jpg) center / cover; border-bottom: 1px solid var(--borde); }
+.logo { display: flex; align-items: center; gap: 9px; margin-right: 12px; text-decoration: none; color: inherit; }
+.logo img { width: 34px; height: 34px; object-fit: contain; }
+.logo-marca { display: block; font-family: var(--titulo); font-weight: 500; font-size: 17px; letter-spacing: 0.42em; line-height: 1; }
+.logo-sub { display: block; margin-top: 3px; color: var(--oro2); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; line-height: 1; }
+.volver { color: var(--suave); text-decoration: none; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 8px; }
+.volver:hover { color: var(--texto); }
+.relleno { flex: 1; }
+.b { background: rgba(7, 6, 11, 0.55); border: 1px solid var(--borde); border-radius: var(--r); padding: 7px 12px; cursor: pointer; white-space: nowrap; color: var(--suave); }
+#barra .b, #vacio .b, dialog .b { text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; }
+.b:hover { border-color: var(--oro); color: var(--texto); }
+.b:disabled { opacity: .4; cursor: default; }
+.b.principal { background: transparent; color: var(--oro2); border-color: var(--oro); font-weight: 500; }
+.b.principal:hover { background: var(--oro); color: var(--fondo); }
+.b.chico { padding: 7px 10px; }
+.b.mini { padding: 1px 8px; border-radius: 6px; }
+.b.grande { padding: 12px 20px; font-size: 16px; }
+.b.redondo { width: 38px; height: 38px; border-radius: 50%; padding: 0; font-size: 15px; }
+.b.ancho { width: 100%; padding: 11px; font-size: 15px; }
+.menu { position: relative; }
+.desplegable { position: absolute; top: 110%; left: 0; z-index: 20; background: var(--panel2); border: 1px solid var(--borde); border-radius: var(--r); padding: 6px; width: 300px; box-shadow: 0 10px 30px #0008; }
+.desplegable button { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 8px 10px; border-radius: 6px; cursor: pointer; }
+.desplegable button:hover { background: var(--borde); }
+.desplegable small { display: block; color: var(--suave); }
+
+#cuerpo { display: grid; grid-template-columns: 1fr 340px; min-height: 0; }
+#visor { position: relative; display: flex; align-items: center; justify-content: center; background: var(--fondo); min-width: 0; min-height: 0; overflow: hidden; }
+#vista { background: #000; cursor: grab; box-shadow: 0 0 0 1px var(--borde); touch-action: none; }
+#vista:active { cursor: grabbing; }
+.chip { position: absolute; top: 12px; left: 12px; background: #07060bcc; border: 1px solid var(--borde); padding: 5px 10px; border-radius: var(--r); font-size: 13px; max-width: 60%; }
+.chip.libre { border-color: var(--oro2); }
+.chip b { color: var(--oro); }
+.pista { position: absolute; bottom: 10px; left: 12px; right: 12px; color: var(--suave); font-size: 12px; text-align: center; pointer-events: none; text-shadow: 0 1px 2px #000; }
+#vacio { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 30px; background: linear-gradient(180deg, rgba(7, 6, 11, 0.42), rgba(7, 6, 11, 0.9)), var(--fondo) url(rite-cosmos.jpg) center / cover no-repeat; text-align: center; }
+#vacio::before { content: ""; position: absolute; width: min(70vh, 620px); aspect-ratio: 1; left: -6%; top: 8%; background: url(rite-emblema-grande.png) center / contain no-repeat; opacity: 0.14; pointer-events: none; }
+#vacio > * { position: relative; }
+#vacio h1 { font-family: var(--titulo); font-weight: 500; font-size: 38px; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.05; margin: 0; max-width: 760px; }
+.pasos { display: grid; grid-template-columns: repeat(4, minmax(0, 170px)); gap: 12px; list-style: none; padding: 0; margin: 0; counter-reset: p; }
+.pasos li { background: rgba(16, 14, 22, 0.82); border: 1px solid var(--borde); border-radius: var(--r); padding: 14px; text-align: left; counter-increment: p; }
+.pasos li::before { content: counter(p); display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--oro); color: var(--oro2); font-family: var(--titulo); font-weight: 500; margin-bottom: 8px; }
+.pasos b { display: block; margin-bottom: 4px; }
+.pasos span { color: var(--suave); font-size: 13px; }
+.acciones { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+#cargando { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 12px; background: #000b; font-size: 16px; z-index: 5; }
+.rueda { width: 28px; height: 28px; border: 3px solid var(--borde); border-top-color: var(--oro); border-radius: 50%; animation: gira 0.8s linear infinite; }
+@keyframes gira { to { transform: rotate(360deg); } }
+#soltar { position: fixed; inset: 10px; border: 2px dashed var(--oro); border-radius: var(--r); background: #07060bdd; display: grid; place-items: center; font-size: 26px; font-family: var(--titulo); text-transform: uppercase; letter-spacing: 0.08em; z-index: 50; pointer-events: none; }
+
+#panel { background: var(--panel); border-left: 1px solid var(--borde); display: flex; flex-direction: column; min-height: 0; }
+#pestanas { display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--borde); }
+#pestanas button { flex: 1 1 auto; min-width: 0; background: none; border: 0; border-bottom: 1px solid transparent; padding: 11px 6px; cursor: pointer; color: var(--suave); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+#pestanas button:hover { color: var(--texto); }
+#pestanas button.activa { color: var(--texto); border-bottom-color: var(--oro); }
+#contenido { overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 16px; }
+.grupo { display: flex; flex-direction: column; gap: 8px; }
+.titulo { display: flex; align-items: center; gap: 6px; font-weight: 500; color: var(--oro2); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.ay { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--borde); background: var(--panel2); color: var(--suave); font-size: 12px; padding: 0; cursor: pointer; flex: none; }
+.ay:hover { color: var(--oro); border-color: var(--oro); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { background: rgba(7, 6, 11, 0.55); border: 1px solid var(--borde); border-radius: var(--r); color: var(--texto); padding: 5px 11px; cursor: pointer; font-size: 13px; }
+.chips button:hover { border-color: var(--suave); }
+.chips button.activa { border-color: var(--oro); color: var(--texto); background: rgba(224, 179, 74, 0.1); }
+.desliza { display: flex; flex-direction: column; gap: 2px; }
+.desliza input { width: 100%; accent-color: var(--oro); }
+.extremos { display: flex; justify-content: space-between; color: var(--suave); font-size: 11px; }
+.interruptor { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.interruptor input { accent-color: var(--oro); width: 16px; height: 16px; }
+.nota { color: var(--suave); font-size: 13px; }
+.tarjeta { background: var(--panel2); border: 1px solid var(--borde); border-radius: var(--r); padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.tarjeta.elegida { border-color: var(--oro); }
+.fila { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.fila .relleno { flex: 1; }
+.tiempo { font-variant-numeric: tabular-nums; color: var(--oro); min-width: 40px; }
+.tarjeta textarea { width: 100%; resize: vertical; min-height: 44px; background: var(--fondo); color: var(--texto); border: 1px solid var(--borde); border-radius: 6px; padding: 6px; font: inherit; }
+.tarjeta input[type=color] { width: 30px; height: 26px; border: 0; background: none; padding: 0; }
+.peq { padding: 3px 8px; font-size: 12px; border-radius: 6px; }
+.peligro:hover { border-color: var(--rojo); color: var(--rojo); }
+.punto { display: flex; align-items: center; gap: 6px; padding: 6px 8px; background: var(--panel2); border: 1px solid var(--borde); border-radius: var(--r); }
+.punto.elegida { border-color: var(--oro); }
+.punto .rombo { color: var(--oro); }
+
+#linea { background: var(--panel); border-top: 1px solid var(--borde); padding: 8px 12px 10px; display: flex; flex-direction: column; gap: 6px; }
+.controles { display: flex; align-items: center; gap: 12px; }
+#tiempo { font-variant-numeric: tabular-nums; min-width: 90px; }
+.dur { display: flex; align-items: center; gap: 4px; color: var(--suave); }
+#pistas { width: 100%; height: 120px; display: block; cursor: pointer; border-radius: 6px; touch-action: none; }
+
+.pop { position: fixed; z-index: 60; max-width: 300px; background: var(--panel2); border: 1px solid var(--oro2); border-radius: var(--r); padding: 10px 12px; box-shadow: 0 10px 30px #000a; font-size: 13px; }
+.aviso { position: fixed; bottom: 140px; left: 50%; transform: translateX(-50%); background: var(--panel2); border: 1px solid var(--oro); padding: 10px 16px; border-radius: var(--r); z-index: 70; box-shadow: 0 10px 30px #000a; }
+dialog { background: var(--panel); color: var(--texto); border: 1px solid var(--borde); border-radius: var(--r); padding: 20px; width: min(520px, 92vw); }
+dialog::backdrop { background: #000b; }
+dialog h2 { font-family: var(--titulo); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+.barraProg { height: 12px; background: var(--fondo); border-radius: 6px; overflow: hidden; border: 1px solid var(--borde); }
+.barraProg div { height: 100%; background: var(--oro); width: 0; transition: width .2s; }
+.dosBotones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+@media (max-width: 900px) {
+  #cuerpo { grid-template-columns: 1fr; grid-template-rows: 1fr 45%; }
+  #panel { border-left: 0; border-top: 1px solid var(--borde); }
+  .pasos { grid-template-columns: repeat(2, minmax(0, 170px)); }
+  #barra { flex-wrap: wrap; }
+}
+
+/* Skins de Kirka */
+dialog.ancho { width: min(760px, 94vw); }
+.rejillaSkins { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; max-height: 52vh; overflow-y: auto; padding-right: 4px; }
+.skinKirka { display: grid; gap: 4px; justify-items: center; padding: 6px; background: var(--fondo); border: 1px solid var(--borde); border-radius: var(--r); color: var(--texto); cursor: pointer; position: relative; font: 11px/1.2 inherit; }
+.skinKirka:hover, .skinKirka.activa { border-color: var(--oro); }
+.skinKirka img { width: 100%; aspect-ratio: 3 / 4; object-fit: contain; image-rendering: pixelated; }
+.skinKirka span { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; }
+.skinKirka .rareza { position: absolute; top: 4px; left: 6px; color: var(--oro2); font-size: 10px; letter-spacing: .1em; }
+
+.titulo-seccion { font-family: var(--display, Oswald), sans-serif; text-transform: uppercase; letter-spacing: .1em; font-size: 12px; color: var(--oro, #e0b34a); margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+.selector { flex: 1; min-width: 0; background: var(--fondo); color: var(--texto); border: 1px solid var(--borde); border-radius: var(--r, 6px); padding: 6px 8px; }
+.tarjeta.elegida { display: grid; gap: 8px; }
+
+/* Lote 3: seguir donde te quedaste, atajos, guía y plantillas */
+.seguir { display: flex; align-items: center; gap: 14px; text-align: left; background: #0009; border: 1px solid var(--oro); border-radius: var(--r); padding: 12px 16px; }
+.atajos { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; align-items: center; margin: 6px 0 16px; }
+.atajos kbd { font-family: ui-monospace, monospace; font-size: 12px; background: #fff1; border: 1px solid var(--borde); border-bottom-width: 3px; border-radius: 6px; padding: 3px 8px; white-space: nowrap; justify-self: start; }
+.dosBotones { display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px; }
+.rejillaPlantillas { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 12px 0 16px; }
+.rejillaPlantillas .b { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px; text-align: left; height: auto; }
+.rejillaPlantillas small { text-transform: none; letter-spacing: 0; color: var(--suave); }
+dialog p { line-height: 1.5; }
+
+/* Lote 5: exportar por destino, GIF y miniatura */
+.tabsExportar { margin-bottom: 12px; }
+.destinos { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.destinos .b { display: grid; grid-template-columns: auto 1fr; column-gap: 8px; row-gap: 2px; align-items: center; text-align: left; padding: 10px 12px; height: auto; }
+.destinos .b .ico { grid-row: span 2; font-size: 18px; color: var(--oro2); }
+.destinos .b small { text-transform: none; letter-spacing: 0; color: var(--suave); font-size: 11px; }
+.destinos .b.activa { border-color: var(--oro); background: #d9a93b1a; }
+.avanzado summary { cursor: pointer; color: var(--suave); font-size: 13px; }
+.aviso2 { color: #ffcf6b; font-size: 13px; margin: 0; }
+.destinos .b { white-space: normal; text-transform: none; letter-spacing: 0.02em; font-size: 13px; }
+.destinos .b b { font-weight: 600; line-height: 1.2; }
+.enlace { width: 100%; font-family: ui-monospace, monospace; font-size: 13px; }
+/* Renders de armas: son anchos, se ven mejor más grandes y sin recortar */
+.rejillaSkins.armas { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.rejillaSkins.armas img { object-fit: contain; aspect-ratio: 3 / 2; height: auto; }
