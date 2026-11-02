@@ -1,0 +1,110 @@
+{
+ "rite": "escena",
+ "version": 1,
+ "salida": {
+  "formato": "16:9",
+  "calidad": "1080",
+  "fps": 30
+ },
+ "fundido": {
+  "entrada": true,
+  "salida": true
+ },
+ "nombre": "Final Break",
+ "mapa": "final-break.json",
+ "escena": {
+  "ambiente": "mapa",
+  "claridad": 0,
+  "lamparas": 0,
+  "niebla": 0,
+  "resplandor": 0.2
+ },
+ "camara": {
+  "duracion": 10,
+  "suave": true,
+  "facil": true,
+  "temblor": 0.05,
+  "claves": [
+   {
+    "t": 0,
+    "pos": [
+     0,
+     6,
+     -95
+    ],
+    "mira": [
+     0,
+     8,
+     -60
+    ],
+    "fov": 55
+   },
+   {
+    "t": 4,
+    "pos": [
+     0,
+     22,
+     -62
+    ],
+    "mira": [
+     0,
+     4,
+     -10
+    ],
+    "fov": 55
+   },
+   {
+    "t": 7,
+    "pos": [
+     25,
+     18,
+     -35
+    ],
+    "mira": [
+     0,
+     6,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 10,
+    "pos": [
+     30,
+     30,
+     -10
+    ],
+    "mira": [
+     0,
+     8,
+     10
+    ],
+    "fov": 50
+   }
+  ]
+ },
+ "filtros": {
+  "preset": "cine",
+  "brillo": 0,
+  "contraste": 0.25,
+  "saturacion": -0.1,
+  "calidez": 0.2,
+  "vineta": 0.55,
+  "grano": 0.2,
+  "barras": true
+ },
+ "textos": [
+  {
+   "texto": "RITE: FINAL BREAK",
+   "estilo": "titulo",
+   "desde": 3.5,
+   "hasta": 7.5
+  },
+  {
+   "texto": "Rondas de eliminación · Elimination rounds",
+   "estilo": "subtitulo",
+   "desde": 4.5,
+   "hasta": 7.8
+  }
+ ]
+}
