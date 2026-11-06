@@ -1,0 +1,76 @@
+{
+ "rite": "escena",
+ "version": 1,
+ "salida": {
+  "formato": "16:9",
+  "calidad": "1080",
+  "fps": 30
+ },
+ "fundido": {
+  "entrada": true,
+  "salida": true
+ },
+ "nombre": "Meltdown",
+ "mapa": "meltdown.json",
+ "escena": {
+  "ambiente": "radioactivo",
+  "claridad": 0.3,
+  "lamparas": 0,
+  "niebla": 0,
+  "resplandor": 0.3
+ },
+ "camara": {
+  "duracion": 8,
+  "suave": true,
+  "facil": true,
+  "temblor": 0.08,
+  "claves": [
+   {
+    "t": 0,
+    "pos": [
+     0,
+     12,
+     -60
+    ],
+    "mira": [
+     0,
+     10,
+     -90
+    ],
+    "fov": 60
+   },
+   {
+    "t": 8,
+    "pos": [
+     0,
+     11,
+     -85
+    ],
+    "mira": [
+     0,
+     10.5,
+     -110
+    ],
+    "fov": 60
+   }
+  ]
+ },
+ "filtros": {
+  "preset": "terror",
+  "brillo": -0.1,
+  "contraste": 0.35,
+  "saturacion": -0.45,
+  "calidez": -0.35,
+  "vineta": 0.85,
+  "grano": 0.45,
+  "barras": false
+ },
+ "textos": [
+  {
+   "texto": "MELTDOWN",
+   "estilo": "terror",
+   "desde": 2,
+   "hasta": 7
+  }
+ ]
+}

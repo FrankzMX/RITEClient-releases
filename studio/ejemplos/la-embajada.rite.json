@@ -1,0 +1,180 @@
+{
+ "rite": "escena",
+ "version": 1,
+ "salida": {
+  "formato": "16:9",
+  "calidad": "1080",
+  "fps": 30
+ },
+ "fundido": {
+  "entrada": true,
+  "salida": true
+ },
+ "nombre": "La Embajada",
+ "mapa": "la-embajada.json",
+ "escena": {
+  "ambiente": "mapa",
+  "claridad": 0,
+  "lamparas": 0.3,
+  "niebla": -0.5,
+  "resplandor": 0.2
+ },
+ "camara": {
+  "duracion": 10,
+  "suave": true,
+  "facil": true,
+  "temblor": 0,
+  "claves": [
+   {
+    "t": 0.0,
+    "pos": [
+     0.0,
+     38,
+     -45.0
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 1.25,
+    "pos": [
+     17.22,
+     38,
+     -41.57
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 2.5,
+    "pos": [
+     31.82,
+     38,
+     -31.82
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 3.75,
+    "pos": [
+     41.57,
+     38,
+     -17.22
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 5.0,
+    "pos": [
+     45.0,
+     38,
+     -0.0
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 6.25,
+    "pos": [
+     41.57,
+     38,
+     17.22
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 7.5,
+    "pos": [
+     31.82,
+     38,
+     31.82
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 8.75,
+    "pos": [
+     17.22,
+     38,
+     41.57
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   },
+   {
+    "t": 10.0,
+    "pos": [
+     0.0,
+     38,
+     45.0
+    ],
+    "mira": [
+     0,
+     12,
+     0
+    ],
+    "fov": 50
+   }
+  ]
+ },
+ "filtros": {
+  "preset": "frio",
+  "brillo": 0,
+  "contraste": 0.1,
+  "saturacion": -0.1,
+  "calidez": -0.6,
+  "vineta": 0.3,
+  "grano": 0,
+  "barras": false
+ },
+ "textos": [
+  {
+   "texto": "RITE: DOUBLE AGENT",
+   "estilo": "titulo",
+   "desde": 1,
+   "hasta": 5
+  },
+  {
+   "texto": "¿Quién es el topo? · Who's the mole?",
+   "estilo": "subtitulo",
+   "desde": 5.5,
+   "hasta": 9
+  }
+ ]
+}
