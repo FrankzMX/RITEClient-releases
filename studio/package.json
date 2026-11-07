@@ -1,0 +1,10 @@
+{
+  "name": "rite-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RITE Studio: escenas, fotos y videos de mapas de Kirka en el navegador",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node kirka-render.cjs estudio"
+  }
+}

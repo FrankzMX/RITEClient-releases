@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; media-src file:; img-src 'self' data:; worker-src blob:" />
+    <title>RITE Clips</title>
+    <link rel="stylesheet" href="viewer.css" />
+  </head>
+  <body>
+    <aside>
+      <header>
+        <b>Mis clips</b>
+        <button id="folder" title="Abrir la carpeta de clips">Carpeta</button>
+      </header>
+      <ul id="list"></ul>
+      <p id="empty" hidden>Todavía no hay clips. Actívalos en el menú del cliente («Clips») y aprieta F8 en una jugada.</p>
+    </aside>
+    <main>
+      <div class="stage"><video id="video" controls playsinline></video></div>
+      <section id="tools" hidden>
+        <div class="trim">
+          <div id="track" class="track">
+            <div class="sel"></div>
+            <div class="head"></div>
+            <button class="handle h-start" aria-label="Inicio del clip" title="Inicio"></button>
+            <button class="handle h-end" aria-label="Final del clip" title="Final"></button>
+          </div>
+          <div class="times"><span>Inicio <b id="t-start"></b></span><span id="range"></span><span>Final <b id="t-end"></b></span></div>
+        </div>
+        <div class="row">
+          <button id="mark-start">Inicio aquí</button>
+          <button id="mark-end">Final aquí</button>
+          <span class="grow"></span>
+          <button id="reveal">Mostrar archivo</button>
+          <button id="delete" class="ghost">Borrar</button>
+          <button id="share" class="gold">Copiar para Discord</button>
+        </div>
+        <div id="progress" hidden><i></i></div>
+        <p id="status"></p>
+      </section>
+    </main>
+    <script src="vendor/mediabunny.min.js"></script>
+    <script src="viewer.js"></script>
+  </body>
+</html>

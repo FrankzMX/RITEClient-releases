@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RITE Studio</title>
+<link rel="icon" href="rite-emblema.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="estudio.css">
+</head>
+<body>
+<header id="barra">
+  <a class="logo" href="https://rite.lat/tools" title="RITE Web">
+    <img src="rite-emblema.png" alt="">
+    <span class="logo-txt"><span class="logo-marca">RITE</span><span class="logo-sub">Studio</span></span>
+  </a>
+  <div class="menu">
+    <button id="bArchivo" class="b" aria-haspopup="true" aria-expanded="false"></button>
+    <div id="menuArchivo" class="desplegable lista" hidden>
+      <button id="bAbrirMapa"></button>
+      <button id="bTextoMapa"></button>
+      <button id="bAbrirProyecto"></button>
+      <button id="bGuardar"></button>
+      <hr>
+      <button id="bPlantillas"></button>
+      <hr>
+      <button id="bAyuda"></button>
+      <button id="bIdioma"></button>
+    </div>
+  </div>
+  <div class="menu">
+    <button id="bEjemplos" class="b" aria-haspopup="true" aria-expanded="false"></button>
+    <div id="menuEjemplos" class="desplegable" hidden></div>
+  </div>
+  <span class="sep"></span>
+  <button id="bDeshacer" class="b icono"></button>
+  <button id="bRehacer" class="b icono"></button>
+  <span class="relleno"></span>
+  <button id="bCompartir" class="b"></button>
+  <button id="bFoto" class="b"></button>
+  <button id="bExportar" class="b principal"></button>
+</header>
+
+<main id="cuerpo">
+  <section id="visor">
+    <canvas id="vista"></canvas>
+    <div id="chipCam" class="chip" hidden></div>
+    <div id="teclas" class="pista"></div>
+    <div id="vacio">
+      <p class="vacio-marca">RITE Studio</p>
+      <h1 id="tBienvenida"></h1>
+      <p id="tBienvenidaD" class="vacio-d"></p>
+      <div class="acciones">
+        <button id="bElegir" class="b principal grande"></button>
+        <button id="bProbar" class="b grande"></button>
+      </div>
+      <button id="bPegar" class="enlace-b"></button>
+    </div>
+    <div id="cargando" hidden><div class="rueda"></div><span></span></div>
+    <div id="soltar" hidden></div>
+  </section>
+  <aside id="panel">
+    <nav id="pestanas"></nav>
+    <div id="contenido"></div>
+  </aside>
+</main>
+
+<footer id="linea">
+  <div class="controles">
+    <button id="bPlay" class="b redondo principal"></button>
+    <span id="tiempo">0:00 / 0:10</span>
+    <span class="dur"><span id="tDur"></span>
+      <button id="bMenos" class="b mini">−</button><button id="bMas" class="b mini">+</button></span>
+    <span class="zoomLinea"><button id="bZoomMenos" class="b mini icono"></button><button id="bZoomMas" class="b mini icono"></button><button id="bZoomTodo" class="b mini icono"></button></span>
+    <button class="ay" data-ayuda="linea">?</button>
+  </div>
+  <canvas id="pistas"></canvas>
+</footer>
+
+<div id="popAyuda" class="pop" hidden></div>
+<div id="aviso" class="aviso" hidden></div>
+<dialog id="dlgExportar"></dialog>
+<dialog id="dlgTexto"></dialog>
+<dialog id="dlgAtajos" class="ancho"></dialog>
+<dialog id="dlgSkins"></dialog>
+<input id="archivo" type="file" accept=".json,application/json" hidden>
+<input id="archivoAudio" type="file" accept="audio/*" multiple hidden>
+
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/jsm/" } }</script>
+<script type="module" src="estudio.js"></script>
+</body>
+</html>

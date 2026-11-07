@@ -1,0 +1,9 @@
+Oswald (fuentes/oswald.woff2) y Creepster (fuentes/creepster.woff2)
+se distribuyen con la SIL Open Font License 1.1: https://openfontlicense.org
+Oswald: Copyright 2016 The Oswald Project Authors.
+Creepster: Copyright 2011 Sideshow.
+
+Anton, Bangers, Bebas Neue, Bungee, Cinzel, Fredoka, Nosifer, Orbitron y
+Press Start 2P: SIL Open Font License 1.1 (https://openfontlicense.org).
+Permanent Marker: Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+Copias tomadas de Fontsource (fontsource.org), subconjunto latino.
