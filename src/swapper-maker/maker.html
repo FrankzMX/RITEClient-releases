@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; media-src blob:; img-src 'self' blob: data:" />
+    <title>RITE · Crear swapper</title>
+    <link rel="stylesheet" href="maker.css" />
+  </head>
+  <body>
+    <aside>
+      <header><b>Swappers</b></header>
+      <ul id="list"></ul>
+      <div class="new">
+        <input id="new-name" maxlength="60" placeholder="Nombre del swapper nuevo" />
+        <button id="new">Crear</button>
+      </div>
+      <p class="hint">Se guardan en Documentos/RITEClient/swappers. El que marques como activo es el que usa el juego (recarga con F5).</p>
+    </aside>
+    <main>
+      <header class="top">
+        <h1 id="title">Escoge o crea un swapper</h1>
+        <span class="grow"></span>
+        <label class="check"><input type="checkbox" id="match" checked /> Igualar volumen al de Kirka</label>
+        <button id="use" class="ghost" disabled>Usar en el juego</button>
+        <button id="save" class="gold" disabled>Guardar</button>
+      </header>
+      <p id="status"></p>
+      <nav id="tabs"></nav>
+      <section id="slots"></section>
+    </main>
+    <script src="../main/i18n-en.js"></script>
+    <script src="../main/i18n.js"></script>
+    <script src="lang.js"></script>
+    <script src="audio.js"></script>
+    <script src="maker.js"></script>
+  </body>
+</html>
